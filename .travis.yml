@@ -6,8 +6,9 @@ jdk:
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker pull openjdk:11-jre-slim-sid
+  - cd springboot-ci-cd-process
+  - chmod +x mvnw
 
 script:
   - ./mvnw clean install
   - ./mvnw deploy jib:build -P deploy-docker
-  
